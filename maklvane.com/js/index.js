@@ -37,20 +37,27 @@ function showSlides() {
   colorBox.addEventListener('click', changeBackgroundColor);
   bgchangeheader.addEventListener('click', changeBackgroundColor)
 
-//Change bg image on click
+//Cycle through bg images on click
 
   // select element
   const bgimage1 = document.getElementById('changeImage');
   const bgimage1header = document.getElementById('changeImageHeader')
 
-  const changeImage = () => {
-    const images = ['url(images/CaliforniaQuail.jpg)', 'url(images/am-nohope-sketch1.jpg)', 'url(images/Seagull.jpg)'];
-    const randomImage = images[Math.floor(Math.random() * images.length)];
-    bgimage1.style.backgroundImage = randomImage;
-  };
+  const images1 = ['url(images/CaliforniaQuail.jpg)', 'url(images/am-nohope-sketch1.jpg)', 'url(images/Seagull.jpg)'];
 
-  bgimage1.addEventListener('click', changeImage);
-  bgimage1header.addEventListener('click', changeImage);
+  //parameters are "element"=the defined div "images"=the image array defined
+  const changeImage = (element, images) => {
+    let currentIndex = 0;
+        
+        return () => {
+            element.style.backgroundImage = images[currentIndex];
+            currentIndex = (currentIndex + 1) % images.length;
+        };
+    };
+    
+
+  bgimage1.addEventListener('click', changeImage(bgimage1, images1));
+  bgimage1header.addEventListener('click', changeImage(bgimage1, images1));
 
 
 });
