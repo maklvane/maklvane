@@ -37,4 +37,20 @@ function showSlides() {
   colorBox.addEventListener('click', changeBackgroundColor);
   bgchangeheader.addEventListener('click', changeBackgroundColor)
 
+//Change bg image on click
+
+  // select element
+  const bgimage1 = document.getElementById('changeImage');
+  const bgimage1header = document.getElementById('changeImageHeader')
+
+  const changeImage = () => {
+    const images = ['url(images/CaliforniaQuail.jpg)', 'url(images/am-nohope-sketch1.jpg)', 'url(images/Seagull.jpg)'];
+    const randomImage = images[Math.floor(Math.random() * images.length)];
+    bgimage1.style.backgroundImage = randomImage;
+  };
+
+  bgimage1.addEventListener('click', changeImage);
+  bgimage1header.addEventListener('click', changeImage);
+
+
 });
