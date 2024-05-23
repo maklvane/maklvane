@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     slides[slideIndex - 1].style.display = "block";
     setTimeout(showSlides, 2000); // Change image every 2 seconds
   }
-  
+
   showSlides();
 
   // Change background color on click
@@ -34,59 +34,84 @@ document.addEventListener('DOMContentLoaded', (event) => {
   colorBox.addEventListener('click', changeBackgroundColor(colorBox, colors));
   bgChangeHeader.addEventListener('click', changeBackgroundColor(colorBox, colors));
 
+  // Media query
+  const mediaQuery = window.matchMedia("(max-width: 767px)");
+
   // Cycle through background images on click
   const bgImage1 = document.getElementById('changeImage');
   const bgImage1Header = document.getElementById('changeImageHeader');
   const bgImage2 = document.getElementById('changeImage2');
   const bgImage2Header = document.getElementById('changeImageHeader2');
   const images1 = [
-    'url(images/CaliforniaQuail.jpg)', 
-    'url(images/am-nohope-sketch1.jpg)', 
-    'url(images/Seagull.jpg)'
+    'images/CaliforniaQuail.jpg',
+    'images/am-nohope-sketch1.jpg',
+    'images/Seagull.jpg'
   ];
-  const images2 = [
-    'url(images/nohope-grass.jpg)', 
-    'url(images/microcult1-grass.jpg)', 
-    'url(images/microcult2-grass.jpg)', 
-    'url(images/microcult3-grass.jpg)', 
-    'url(images/microcult4-grass.jpg)'
+  const imagesMicrocult = [
+    'images/nohope-grass.jpg',
+    'images/microcult1-grass.jpg',
+    'images/microcult2-grass.jpg',
+    'images/microcult3-grass.jpg',
+    'images/microcult4-grass.jpg'
   ];
 
-  function createImageChanger(element, images) {
+  function mobileBackgroundImageChanger(element, images) {
     let currentIndex = 0;
     return () => {
-      element.style.backgroundImage = images[currentIndex];
+      element.style.backgroundImage = `url(${images[currentIndex]})`;
       currentIndex = (currentIndex + 1) % images.length;
     };
   }
 
-  bgImage1.addEventListener('click', createImageChanger(bgImage1, images1));
-  bgImage1Header.addEventListener('click', createImageChanger(bgImage1, images1));
-  bgImage2.addEventListener('click', createImageChanger(bgImage2, images2));
-  bgImage2Header.addEventListener('click', createImageChanger(bgImage2, images2));
+  bgImage1.addEventListener('click', mobileBackgroundImageChanger(bgImage1, images1));
+  bgImage1Header.addEventListener('click', mobileBackgroundImageChanger(bgImage1, images1));
+  bgImage2.addEventListener('click', mobileBackgroundImageChanger(bgImage2, imagesMicrocult));
+  bgImage2Header.addEventListener('click', mobileBackgroundImageChanger(bgImage2, imagesMicrocult));
 
   // Change background in smaller image
-  const slideshow1 = document.getElementById('slideshow1');
-  const slideshow1Buttons = document.getElementsByClassName('slideshow1-button');
-  const slides1 = [
-    'images/nohope-grass.jpg', 
-    'images/microcult1-grass.jpg', 
-    'images/microcult2-grass.jpg', 
-    'images/microcult3-grass.jpg', 
-    'images/microcult4-grass.jpg'
-  ];
+  const slideshowMicrocult = document.getElementById('slideshow1');
+  const bgMicrocult = document.getElementById('microcult-desktop');
+  const buttonsMicrocult = document.getElementsByClassName('slideshow1-button');
 
-  function createSlideshowChanger(element, images) {
+  function createDesktopSlideshowChanger(element, images) {
     let currentIndex = 0;
     return () => {
+      const randomDegree = Math.random() * 20 - 10;
+      element.style.transform = `rotate(${randomDegree}deg)`;
       element.src = images[currentIndex];
       currentIndex = (currentIndex + 1) % images.length;
     };
   }
 
-  const changeSlideshowImage = createSlideshowChanger(slideshow1, slides1);
+  const mobileMicrocult = mobileBackgroundImageChanger(bgMicrocult, imagesMicrocult);
+  const desktopMicrocult = createDesktopSlideshowChanger(slideshowMicrocult, imagesMicrocult);
 
-  Array.from(slideshow1Buttons).forEach(button => {
-    button.addEventListener('click', changeSlideshowImage);
+  if (mediaQuery.matches) {
+    mobileMicrocult();
+  }
+
+  function handleScreenSizeChange(event) {
+    if (event.matches) {
+      mobileMicrocult();
+    } else {
+      bgMicrocult.style.backgroundImage = `url('')`; // Reset background image on desktop view
+    }
+  }
+
+  // Initial check
+  handleScreenSizeChange(mediaQuery);
+
+  // Listen for changes in the media query state
+  mediaQuery.addEventListener('change', handleScreenSizeChange);
+
+  // Add event listeners to buttons
+  Array.from(buttonsMicrocult).forEach(button => {
+    button.addEventListener('click', () => {
+      if (mediaQuery.matches) {
+        mobileMicrocult();
+      } else {
+        desktopMicrocult();
+      }
+    });
   });
 });

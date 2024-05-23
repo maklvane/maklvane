@@ -110,3 +110,15 @@ a:hover{
     background-position: center;
     background-size: cover;
   }
+
+  #slideshow1{
+    display: block;
+  }
+
+  @media screen and (max-width: 768px) {
+
+    #slideshow1{
+      display: none;
+    }
+ 
+  }
