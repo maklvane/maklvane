@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log("hello");
-
   // Slideshow
   let slideIndex = 0;
   const slides = document.getElementsByClassName("slide");
@@ -112,4 +111,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
       }
     });
   });
+
+
+//preload images
+function preloadImages(urls) {
+  var preloadedImages = [];
+  for (var i = 0; i < urls.length; i++) {
+      var img = new Image();
+      img.src = urls[i];
+      preloadedImages.push(img);
+  }
+  return preloadedImages;
+}
+
+// Preload images
+var preloadedImages = preloadImages(imagesMicrocult.concat(images1));
+
+
 });
