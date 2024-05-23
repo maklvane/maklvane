@@ -1,76 +1,92 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-
-  //console log
   console.log("hello");
-  
-  //slideshow
+
+  // Slideshow
   let slideIndex = 0;
-  showSlides();
-  
+  const slides = document.getElementsByClassName("slide");
+
   function showSlides() {
-    let i;
-    let slides = document.getElementsByClassName("slide");
-    for (i = 0; i < slides.length; i++) {
+    for (let i = 0; i < slides.length; i++) {
       slides[i].style.display = "none";
     }
     slideIndex++;
-    if (slideIndex > slides.length) {slideIndex = 1}
-    slides[slideIndex-1].style.display = "block";
+    if (slideIndex > slides.length) {
+      slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";
     setTimeout(showSlides, 2000); // Change image every 2 seconds
   }
   
-  
-  //change color on click
-  
-    // Select the element
-    const colorBox = document.getElementById('changebg');
-    const bgchangeheader = document.getElementById('changebgheader')
-    
-    // Define the function that changes the background color
-    const colors1 = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+  showSlides();
 
-    const changeBackgroundColor = (element, colors) => {
+  // Change background color on click
+  const colorBox = document.getElementById('changebg');
+  const bgChangeHeader = document.getElementById('changebgheader');
+  const colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange'];
+
+  function changeBackgroundColor(element, colors) {
+    return () => {
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        return() => {
-          element.style.backgroundColor = randomColor;
-        }
+      element.style.backgroundColor = randomColor;
     };
-    
-    // Add the click event listener to the element
-    colorBox.addEventListener('click', changeBackgroundColor(colorBox, colors1));
-    bgchangeheader.addEventListener('click', changeBackgroundColor(colorBox, colors1))
+  }
 
-    
-  
-  //Cycle through bg images on click
-  
-    // select element
-    const bgimage1 = document.getElementById('changeImage');
-    const bgimage1header = document.getElementById('changeImageHeader')
+  colorBox.addEventListener('click', changeBackgroundColor(colorBox, colors));
+  bgChangeHeader.addEventListener('click', changeBackgroundColor(colorBox, colors));
 
-    const bgimage2 = document.getElementById('changeImage2');
-    const bgimage2header = document.getElementById('changeImageHeader2')
-    
-  
-    const images1 = ['url(images/CaliforniaQuail.jpg)', 'url(images/am-nohope-sketch1.jpg)', 'url(images/Seagull.jpg)'];
-    const images2 = ['url(images/nohope-grass.jpg)', 'url(images/microcult1-grass.jpg)', 'url(images/microcult2-grass.jpg)', 'url(images/microcult3-grass.jpg)', 'url(images/microcult4-grass.jpg)'];
-  
-    //parameters are "element"=the defined div "images"=the image array defined
-    const changeImage = (element, images) => {
-      let currentIndex = 0;
-      return () => {
-          element.style.backgroundImage = images[currentIndex];
-          currentIndex = (currentIndex + 1) % images.length;
-      };
+  // Cycle through background images on click
+  const bgImage1 = document.getElementById('changeImage');
+  const bgImage1Header = document.getElementById('changeImageHeader');
+  const bgImage2 = document.getElementById('changeImage2');
+  const bgImage2Header = document.getElementById('changeImageHeader2');
+  const images1 = [
+    'url(images/CaliforniaQuail.jpg)', 
+    'url(images/am-nohope-sketch1.jpg)', 
+    'url(images/Seagull.jpg)'
+  ];
+  const images2 = [
+    'url(images/nohope-grass.jpg)', 
+    'url(images/microcult1-grass.jpg)', 
+    'url(images/microcult2-grass.jpg)', 
+    'url(images/microcult3-grass.jpg)', 
+    'url(images/microcult4-grass.jpg)'
+  ];
+
+  function createImageChanger(element, images) {
+    let currentIndex = 0;
+    return () => {
+      element.style.backgroundImage = images[currentIndex];
+      currentIndex = (currentIndex + 1) % images.length;
     };
-      
-    //First Section
-    bgimage1.addEventListener('click', changeImage(bgimage1, images1));
-    bgimage1header.addEventListener('click', changeImage(bgimage1, images1));
-    
-    //Second Section
-    bgimage2.addEventListener('click', changeImage(bgimage2, images2));
-    bgimage2header.addEventListener('click', changeImage(bgimage2, images2));
-  
-  
+  }
+
+  bgImage1.addEventListener('click', createImageChanger(bgImage1, images1));
+  bgImage1Header.addEventListener('click', createImageChanger(bgImage1, images1));
+  bgImage2.addEventListener('click', createImageChanger(bgImage2, images2));
+  bgImage2Header.addEventListener('click', createImageChanger(bgImage2, images2));
+
+  // Change background in smaller image
+  const slideshow1 = document.getElementById('slideshow1');
+  const slideshow1Buttons = document.getElementsByClassName('slideshow1-button');
+  const slides1 = [
+    'images/nohope-grass.jpg', 
+    'images/microcult1-grass.jpg', 
+    'images/microcult2-grass.jpg', 
+    'images/microcult3-grass.jpg', 
+    'images/microcult4-grass.jpg'
+  ];
+
+  function createSlideshowChanger(element, images) {
+    let currentIndex = 0;
+    return () => {
+      element.src = images[currentIndex];
+      currentIndex = (currentIndex + 1) % images.length;
+    };
+  }
+
+  const changeSlideshowImage = createSlideshowChanger(slideshow1, slides1);
+
+  Array.from(slideshow1Buttons).forEach(button => {
+    button.addEventListener('click', changeSlideshowImage);
   });
+});
