@@ -65,8 +65,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   bgImage1.addEventListener('click', mobileBackgroundImageChanger(bgImage1, images1));
   bgImage1Header.addEventListener('click', mobileBackgroundImageChanger(bgImage1, images1));
-  bgImage2.addEventListener('click', mobileBackgroundImageChanger(bgImage2, imagesMicrocult));
-  bgImage2Header.addEventListener('click', mobileBackgroundImageChanger(bgImage2, imagesMicrocult));
 
   // Change background in smaller image
   const slideshowMicrocult = document.getElementById('slideshow1');
