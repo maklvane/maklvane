@@ -1,0 +1,124 @@
+@font-face {
+  font-family: alta-marfa;
+  src: url("https://maklvane.com/fonts/AltaMarfaScriptv1-Regular.woff2");
+}
+
+@font-face {
+  font-family: alta-marfa-allcaps;
+  src: url("https://maklvane.com/fonts/alta-marfa-ALLCAPS-Regular.woff2");
+}
+
+main{
+  background-color: rgb(247, 241, 234);
+}
+
+p{
+  font-family: Arial, Helvetica, sans-serif;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  line-height: 1.35rem;
+}
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+  
+}
+
+h1{
+    color: black;
+    font-size: 8vw;
+    font-family: alta-marfa, Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    
+}
+
+h2{
+  font-family: alta-marfa, Georgia, 'Times New Roman', Times, serif;
+  font-weight: normal;
+  font-size: 2rem;
+}
+
+.small{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+}
+
+.half-width{
+    max-width: 800px;
+    margin: auto;
+}
+
+.text{
+  max-width:1200px;
+  min-width: 350px;
+  width:60%;
+  padding: 30px 0 75px 30px;
+}
+
+a{
+  animation: mellow 2s infinite;
+  text-decoration: none;
+}
+
+a:hover{
+  animation: mellow 2s infinite;
+  text-decoration: underline;
+}
+
+@keyframes mellow {
+  0%,100% {color: rgb(255, 102, 0);}
+  66% {color: rgb(197, 123, 238);}
+  33% {color: cornflowerblue;}
+}
+
+/* Slidshow */
+
+.slideshow{
+  max-width: 50%;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+}
+
+.slide{
+  display: none;
+  max-width:100%;
+  margin-top: 10vh;
+}
+
+/* resizing images */
+.full-width {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .full-width img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .background-image {
+    background-image: url('#');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  #slideshow1{
+    display: block;
+  }
+
+  @media screen and (max-width: 768px) {
+
+    #slideshow1{
+      display: none;
+    }
+ 
+  }
