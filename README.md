@@ -1,4 +1,4 @@
-I created <a href="https://maklvane.com" target="_blank">maklvane.com</a> as a website for me to expirement with javascript, html, css and as a way to show some art in a loose and playful way. 
+I created <a href="https://maklvane.com" target="blank">maklvane.com</a> as a website for me to expirement with javascript, html, css and as a way to show some art in a loose and playful way. 
 
 <!--
 **maklvane/maklvane** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
